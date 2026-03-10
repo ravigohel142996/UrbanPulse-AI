@@ -95,7 +95,7 @@ def pct_change_label(current: float, previous: float) -> str:
     """Return a signed percentage-change string (e.g. '+5.2%')."""
     if previous == 0:
         return "N/A"
-    pct = (current - previous) / abs(previous) * 100
+    pct = (current - previous) / previous * 100
     sign = "+" if pct >= 0 else ""
     return f"{sign}{pct:.1f}%"
 
