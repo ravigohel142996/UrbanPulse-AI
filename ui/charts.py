@@ -25,6 +25,32 @@ from network.road_network import CityRoadNetwork
 
 
 # ---------------------------------------------------------------------------
+# Shared layout defaults for all charts
+# ---------------------------------------------------------------------------
+
+_CHART_LAYOUT = dict(
+    plot_bgcolor="#0b0e14",
+    paper_bgcolor="#111827",
+    font=dict(color="#e2e8f0", family="Inter, Segoe UI, Helvetica Neue, Arial, sans-serif"),
+    title_font=dict(color="#93c5fd", size=15, family="Inter, Segoe UI, sans-serif"),
+    legend=dict(
+        bgcolor="#1e2740",
+        bordercolor="#2d3a5a",
+        borderwidth=1,
+        font=dict(color="#cbd5e1"),
+    ),
+    margin=dict(l=10, r=10, t=50, b=10),
+)
+
+_AXIS_STYLE = dict(
+    gridcolor="#1f2937",
+    zerolinecolor="#1f2937",
+    tickfont=dict(color="#94a3b8", size=11),
+    title_font=dict(color="#90caf9", size=12),
+)
+
+
+# ---------------------------------------------------------------------------
 # Traffic flow timeline
 # ---------------------------------------------------------------------------
 
@@ -57,11 +83,9 @@ def traffic_flow_timeline(df: pd.DataFrame) -> go.Figure:
     )
     fig.update_layout(
         height=CHART_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
-        xaxis=dict(tickmode="linear", dtick=1, gridcolor="#1e2130"),
-        yaxis=dict(gridcolor="#1e2130"),
+        **_CHART_LAYOUT,
+        xaxis=dict(tickmode="linear", dtick=1, **_AXIS_STYLE),
+        yaxis=dict(**_AXIS_STYLE),
     )
     return fig
 
@@ -107,9 +131,9 @@ def predicted_vs_actual(
         xaxis_title="Actual Vehicles",
         yaxis_title="Predicted Vehicles",
         height=CHART_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
+        **_CHART_LAYOUT,
+        xaxis=dict(**_AXIS_STYLE),
+        yaxis=dict(**_AXIS_STYLE),
     )
     return fig
 
@@ -143,9 +167,9 @@ def congestion_heatmap(pivot: pd.DataFrame) -> go.Figure:
         xaxis_title="Hour of Day",
         yaxis_title="Road ID",
         height=max(CHART_HEIGHT, len(pivot_top) * 20 + 100),
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
+        **_CHART_LAYOUT,
+        xaxis=dict(**_AXIS_STYLE),
+        yaxis=dict(**_AXIS_STYLE),
     )
     return fig
 
@@ -171,10 +195,9 @@ def feature_importance_chart(importances: dict[str, float]) -> go.Figure:
         title="🔍 Feature Importance",
         xaxis_title="Importance",
         height=CHART_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
-        xaxis=dict(gridcolor="#1e2130"),
+        **_CHART_LAYOUT,
+        xaxis=dict(**_AXIS_STYLE),
+        yaxis=dict(**_AXIS_STYLE),
     )
     return fig
 
@@ -239,12 +262,9 @@ def road_network_graph(network: CityRoadNetwork) -> go.Figure:
     fig.update_layout(
         title="🗺️ City Road Network",
         height=MAP_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
+        **_CHART_LAYOUT,
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        legend=dict(bgcolor="#1e2130", bordercolor="#333"),
         margin=dict(l=0, r=0, t=50, b=0),
     )
     return fig
@@ -309,9 +329,7 @@ def route_visualisation(
     fig.update_layout(
         title=title,
         height=MAP_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
+        **_CHART_LAYOUT,
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         margin=dict(l=0, r=0, t=50, b=0),
@@ -342,10 +360,10 @@ def weather_impact_chart(df: pd.DataFrame) -> go.Figure:
     )
     fig.update_layout(
         height=CHART_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
-        font_color="#ffffff",
+        **_CHART_LAYOUT,
         coloraxis_showscale=False,
+        xaxis=dict(**_AXIS_STYLE),
+        yaxis=dict(**_AXIS_STYLE),
     )
     return fig
 
@@ -360,11 +378,10 @@ def _empty_figure(message: str) -> go.Figure:
         text=message,
         xref="paper", yref="paper",
         x=0.5, y=0.5, showarrow=False,
-        font=dict(size=16, color="#aaaaaa"),
+        font=dict(size=16, color="#64748b"),
     )
     fig.update_layout(
         height=CHART_HEIGHT,
-        plot_bgcolor="#0e1117",
-        paper_bgcolor="#0e1117",
+        **_CHART_LAYOUT,
     )
     return fig

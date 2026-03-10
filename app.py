@@ -106,34 +106,60 @@ def main() -> None:
 
     if not st.session_state.get("simulation_complete"):
         # Welcome screen
-        st.info(
-            "👈 Configure the simulation parameters in the sidebar, "
-            "then click **▶ Run Simulation** to start."
-        )
         st.markdown(
             """
-            ### 🚦 About UrbanPulse AI
-
-            UrbanPulse AI is a **Smart City Traffic Intelligence Platform** that:
-
-            | Component | Technology |
-            |---|---|
-            | City Road Network | NetworkX directed graph |
-            | Traffic Simulation | Stochastic event-driven generator |
-            | Flow Prediction | RandomForest Regressor (Scikit-learn) |
-            | Anomaly Detection | IsolationForest (Scikit-learn) |
-            | Route Optimisation | Dijkstra + A* algorithms |
-            | Visualisation | Plotly interactive charts |
-            | Dashboard | Streamlit |
-
-            **Features**
-            - Rush-hour peak patterns
-            - Weather-impact modelling (clear / rain / fog / snow)
-            - Special-event traffic spikes
-            - Congestion-aware route optimisation
-            - Real-time KPI tiles & anomaly rate
-            """
+            <div class="up-welcome-banner">
+                👈&nbsp; Configure simulation parameters in the sidebar, then click
+                <strong>▶ Run Simulation</strong> to start.
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        col_about, col_features = st.columns(2)
+        with col_about:
+            st.markdown(
+                """
+                <div class="up-info-card">
+                    <h3>🚦 About UrbanPulse AI</h3>
+                    <p>A <strong>Smart City Traffic Intelligence Platform</strong>
+                    built with cutting-edge ML and graph algorithms.</p>
+                    <table class="up-table">
+                        <thead><tr><th>Component</th><th>Technology</th></tr></thead>
+                        <tbody>
+                            <tr><td>City Road Network</td><td>NetworkX directed graph</td></tr>
+                            <tr><td>Traffic Simulation</td><td>Stochastic event-driven generator</td></tr>
+                            <tr><td>Flow Prediction</td><td>RandomForest Regressor</td></tr>
+                            <tr><td>Anomaly Detection</td><td>IsolationForest</td></tr>
+                            <tr><td>Route Optimisation</td><td>Dijkstra + A* algorithms</td></tr>
+                            <tr><td>Visualisation</td><td>Plotly interactive charts</td></tr>
+                            <tr><td>Dashboard</td><td>Streamlit</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        with col_features:
+            st.markdown(
+                """
+                <div class="up-info-card">
+                    <h3>✨ Features</h3>
+                    <ul class="up-feature-list">
+                        <li>🕐 Rush-hour peak traffic patterns</li>
+                        <li>🌦️ Weather-impact modelling (clear / rain / fog / snow)</li>
+                        <li>🎉 Special-event traffic spikes</li>
+                        <li>🛣️ Congestion-aware route optimisation</li>
+                        <li>📊 Real-time KPI tiles &amp; anomaly rate</li>
+                        <li>🤖 ML-powered traffic predictions</li>
+                        <li>🗺️ Interactive road network graph</li>
+                        <li>🔍 Automated anomaly detection</li>
+                    </ul>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
         return
 
     # Retrieve stored objects
