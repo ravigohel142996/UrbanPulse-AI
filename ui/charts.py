@@ -262,10 +262,9 @@ def road_network_graph(network: CityRoadNetwork) -> go.Figure:
     fig.update_layout(
         title="🗺️ City Road Network",
         height=MAP_HEIGHT,
-        **_CHART_LAYOUT,
+        **{**_CHART_LAYOUT, "margin": dict(l=0, r=0, t=50, b=0)},
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        margin=dict(l=0, r=0, t=50, b=0),
     )
     return fig
 
@@ -329,10 +328,9 @@ def route_visualisation(
     fig.update_layout(
         title=title,
         height=MAP_HEIGHT,
-        **_CHART_LAYOUT,
+        **{**_CHART_LAYOUT, "margin": dict(l=0, r=0, t=50, b=0)},
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        margin=dict(l=0, r=0, t=50, b=0),
     )
     return fig
 
